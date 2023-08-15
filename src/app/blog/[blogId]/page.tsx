@@ -11,6 +11,9 @@ export default async function page({params}:{params:Iparams}) {
   const blog = await getBlogsById(params)
   const currentUser = await getCurrentUser()
 
+  console.log(blog?.name);
+  
+
   return (
     <div>
       <div>
