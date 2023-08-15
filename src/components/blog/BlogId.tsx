@@ -40,7 +40,11 @@ const initialState:InitialStateProps = {
 export default function BlogId({name,description,imageSrc,blogId,authorName,createdAt,currentUser,userId,content}:BlogProps){
     
     const router = useRouter();
-    const [state,setState] = useState(initialState)
+    const [state,setState] = useState({...initialState,name:name})
+    // by default state.name will be just empty string but we make it equal to name of the blog and if you change the event, the name changes.
+
+
+
     const [onActive, setOnActive] = useState(false)
 
     const setCustomValue = (id:any, value:any) => {
@@ -121,7 +125,8 @@ export default function BlogId({name,description,imageSrc,blogId,authorName,crea
                         <Input placeholder="Name" id="name" type="text" value={state.name} name="name" onChange={handleChange}/>
                         <Input placeholder="Description" id="description" type="text" value={state.description || description} name="description" onChange={handleChange}/>
                         <Input big placeholder="Blog content" id="content" type="text" value={state.content || content} name="content" onChange={handleChange}/>
-                        <button type="submit">Submit</button>
+                        <button type="submit" disabled={state.name === name || state.description === description || state.content === content}>Submit</button>
+                        {/* so you won't be able to update the blog if you have the same items in value as you have in db. You can add image if you want. */}
                     </div>
                 </form>
             )}
